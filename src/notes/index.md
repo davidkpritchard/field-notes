@@ -1,8 +1,16 @@
 ---
 layout: base.njk
 title: Notes
+eleventyExcludeFromCollections: true
 ---
 
 ## Notes
 
-- [First note]({{ '/notes/first-note/' | url }})
+<ul>
+{% for note in collections.notes %}
+  <li>
+    <a href="{{ note.url | url }}">{{ note.data.title }}</a>
+    <small>— {{ note.date | ymd }}</small>
+  </li>
+{% endfor %}
+</ul>
