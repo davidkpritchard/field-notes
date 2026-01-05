@@ -17,16 +17,26 @@ module.exports = function (eleventyConfig) {
 
   // ---- Collections ----
 eleventyConfig.addCollection("notes", function (collectionApi) {
+  const now = new Date();
+
   return collectionApi
     .getAll()
     .filter((item) => {
       const p = item.inputPath || "";
+
       const isNote =
         (p.includes("/notes/") || p.includes("\\notes\\")) &&
         p.endsWith(".md");
+
       const isNotesIndex =
         p.endsWith("/notes/index.md") || p.endsWith("\\notes\\index.md");
-      return isNote && !isNotesIndex;
+
+      const isDraft = item.data && item.data.draft === true;
+
+      const hasDate = item.date instanceof Date;
+      const isPublished = hasDate && item.date <= now;
+
+      return isNote && !isNotesIndex && !isDraft && isPublished;
     })
     .sort((a, b) => b.date - a.date);
 });
