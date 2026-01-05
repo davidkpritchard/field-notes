@@ -18,8 +18,8 @@
     <header>
       <h1 style="margin:0;">{{ title or "Field Notes" }}</h1>
       <nav>
-        <a href="/">Home</a>
-        <a href="/notes/">Notes</a>
+	<a href="{{ '/' | url }}">Home</a>
+	<a href="{{ '/notes/' | url }}">Notes</a>
       </nav>
     </header>
     <main>

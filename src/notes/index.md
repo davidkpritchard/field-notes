@@ -5,4 +5,4 @@ title: Notes
 
 ## Notes
 
-- [First note](/notes/first-note/)
+- [First note]({{ '/notes/first-note/' | url }})
